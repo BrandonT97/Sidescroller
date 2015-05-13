@@ -31,6 +31,13 @@ function getDeltaTime()
 var SCREEN_WIDTH = canvas.width;
 var SCREEN_HEIGHT = canvas.height;
 
+var STATE_SPLASH = 0;
+var STATE_MENU = 1;
+var STATE_GAME = 2;
+var STATE_GAMEOVER = 3;
+
+var gameState = STATE_SPLASH;
+
 var METRE = TILE;
 var GRAVITY = METRE * 9.8 * 6;
 var MAXDX = METRE * 10;
@@ -165,7 +172,15 @@ function drawMap()
 		}
 	}
 }
-function run()
+function runSplash(deltaTime)
+{
+	
+}
+function runMenu(deltaTime)
+{
+	
+}
+function runGame(deltaTime)
 {
 	context.fillStyle = "#ccc";
 	context.fillRect(0, 0, canvas.width, canvas.height);
@@ -198,6 +213,11 @@ context.fillText("FPS: " + fps, 5, 20, 100);
 
 // This code will set up the framework so that the 'run' function is called 60 times per second.
 // We have a some options to fall back on in case the browser doesn't support our preferred method.
+function runGameOver(deltaTime)
+{
+	
+}
+
 (function() {
   var onEachFrame;
   if (window.requestAnimationFrame) {
@@ -219,4 +239,4 @@ context.fillText("FPS: " + fps, 5, 20, 100);
   window.onEachFrame = onEachFrame;
 })();
 
-window.onEachFrame(run);
+window.onEachFrame(runGame);
