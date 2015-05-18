@@ -38,6 +38,9 @@ var STATE_GAMEOVER = 3;
 
 var gameState = STATE_SPLASH;
 
+var score = 0;
+var Lives = 4;
+
 var METRE = TILE;
 var GRAVITY = METRE * 9.8 * 6;
 var MAXDX = METRE * 10;
@@ -188,7 +191,18 @@ function runGame(deltaTime)
 	drawMap();
 
 	initialize();
-
+//score
+	context.fillStyle = "black";
+	context.font = "32px Arial";
+	var scoreText = " Score: " + score;
+	context.fillStyle(scoreText, SCREEN_WIDTH - 170, 35);
+	
+	// life counter
+	for(var i=0; i<lives; i++)
+	{
+		context.drawImage(heartImage, 20 + ((heartImage.width+2)*i), 10);
+	}
+	
 var deltaTime = getDeltaTime();
 
 context.drawImage(chuckNorris, SCREEN_WIDTH/2 - chuckNorris.width/2, SCREEN_HEIGHT/2 - chuckNorris.height/2);

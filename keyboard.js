@@ -49,7 +49,7 @@ Player.prototype.update = function(deltaTime)
 	if( typeof(this.rotation) == "undefined" )
 		this.rotation = 0;
 	
-	if (Keyboard.isKeyDown(Keyboard.kEY_SPACE) == true)
+	if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true)
 	{
 		this.rotation -= deltaTime;
 	}
