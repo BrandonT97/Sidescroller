@@ -79,8 +79,8 @@ var fpsCount = 0;
 var fpsTime = 0;
 
 var LAYER_COUNT = 3;
-var LAYER_BACKGROUND = 0;
-var LAYER_PLATFORMS = 1;
+var LAYER_BACKGROUND = 1;
+var LAYER_PLATFORMS = 2;
 var LAYER_LADDER = 3;
 
 // load an image to draw
@@ -222,14 +222,15 @@ context.font="14px Arial";
 context.fillText("FPS: " + fps, 5, 20, 100);
 
 }
-//-------------------- Don't modify anything below here
-
-// This code will set up the framework so that the 'run' function is called 60 times per second.
-// We have a some options to fall back on in case the browser doesn't support our preferred method.
 function runGameOver(deltaTime)
 {
 	
 }
+//-------------------- Don't modify anything below here
+
+// This code will set up the framework so that the 'run' function is called 60 times per second.
+// We have a some options to fall back on in case the browser doesn't support our preferred method.
+
 
 (function() {
   var onEachFrame;
