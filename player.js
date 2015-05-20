@@ -18,7 +18,7 @@ var ANIM_IDLE_RIGHT = 5;
 var ANIM_JUMP_RIGHT = 6;
 var ANIM_WALK_RIGHT = 7;
 var ANIM_SHOOT_RIGHT = 8;
-var ANIM_MAX = 9;
+var ANIM_MAX = 6;
 
 var direction = RIGHT;
 

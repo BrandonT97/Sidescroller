@@ -41,14 +41,6 @@ var gameState = STATE_SPLASH;
 var score = 0;
 var Lives = 4;
 
-var METRE = TILE;
-var GRAVITY = METRE * 9.8 * 6;
-var MAXDX = METRE * 10;
-var MAXDY = METRE * 15;
-var ACCEL = MAXDX * 2;
-var FRICTION = MAXDX * 6;
-var JUMP = METRE * 1500;
-
 var LAYER_COUNT = 3;
 //The number of layers in your map. In the sample from this week’s lesson we’re using
 //a background layer, a layer for the platforms, and a layer for the ladders. (We’ll add
@@ -72,6 +64,13 @@ var TILESET_COUNT_X = 14;
 var TILESET_COUNT_Y = 14;
 //How many rows of tile images are in the tileset 
 
+var METRE = TILE;
+var GRAVITY = METRE * 9.8 * 6;
+var MAXDX = METRE * 10;
+var MAXDY = METRE * 15;
+var ACCEL = MAXDX * 2;
+var FRICTION = MAXDX * 6;
+var JUMP = METRE * 1500;
 // some variables to calculate the Frames Per Second (FPS - this tells use
 // how fast our game is running, and allows us to make the game run at a 
 // constant speed)
