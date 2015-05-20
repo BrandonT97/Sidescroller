@@ -4,7 +4,7 @@ var context = canvas.getContext("2d");
 var SCREEN_WIDTH = canvas.width;
 var SCREEN_HEIGHT = canvas.height;
 
-var HEALTH = 100;
+var Lives = 4;
 
 var LEFT = 0;
 var RIGHT = 1;

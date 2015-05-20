@@ -79,9 +79,9 @@ var fpsCount = 0;
 var fpsTime = 0;
 
 var LAYER_COUNT = 3;
-var LAYER_BACKGROUND = 1;
-var LAYER_PLATFORMS = 2;
-var LAYER_LADDER = 3;
+var LAYER_BACKGROUND = 0;
+var LAYER_PLATFORMS = 1;
+var LAYER_LADDER = 2;
 
 // load an image to draw
 var chuckNorris = document.createElement("img");
@@ -192,7 +192,7 @@ function runGame(deltaTime)
 	
 	drawMap();
 
-	initialize();
+	
 //score
 	//context.fillStyle = "black";
 	//context.font = "32px Arial";
@@ -225,6 +225,7 @@ context.font="14px Arial";
 context.fillText("FPS: " + fps, 5, 20, 100);
 
 }
+initialize();
 function runGameOver(deltaTime)
 {
 	
