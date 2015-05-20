@@ -90,6 +90,9 @@ chuckNorris.src = "GOD.png";
 var tileset = document.createElement("img");
 tileset.src = "tiles/tileset.png";
 
+var heartImage = document.createElement("img");
+heartImage.src = "health.png";
+
 var cells = []; // the array that holds our simplified collision data
 function initialize() {
 	for(var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++) { // initialize the collision map
@@ -191,15 +194,15 @@ function runGame(deltaTime)
 
 	initialize();
 //score
-	context.fillStyle = "black";
-	context.font = "32px Arial";
-	var scoreText = " Score: " + score;
-	context.fillStyle(scoreText, SCREEN_WIDTH - 170, 35);
+	//context.fillStyle = "black";
+	//context.font = "32px Arial";
+	//var scoreText = " Score: " + score;
+	//context.drawText(scoreText, SCREEN_WIDTH - 170, 35);
 	
 	// life counter
-	for(var i=0; i<lives; i++)
+	for(var i=0; i<Lives; i++)
 	{
-		context.drawImage(heartImage, 20 + ((heartImage.width+2)*i), 10);
+		context.drawImage(heartImage, 20 + ((heartImage.width+2)*i), 20);
 	}
 	
 var deltaTime = getDeltaTime();
