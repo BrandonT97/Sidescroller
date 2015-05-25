@@ -9,6 +9,7 @@ var Lives = 4;
 var LEFT = 0;
 var RIGHT = 1;
 
+var PLAYER_SPEED = 10
 var ANIM_IDLE_LEFT = 0;
 var ANIM_JUMP_LEFT = 1;
 var ANIM_WALK_LEFT = 2;

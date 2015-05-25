@@ -202,8 +202,8 @@ Player.prototype.update = function(deltaTime)
 			}
 		}	
 }
-Player.prototype.draw = function()
-{
-	this.sprite.draw(context, this.position.x, this.position.y);
-}
+	Player.prototype.draw = function()
+	{
+		this.sprite.draw(context, this.position.x, this.position.y);
+	}
 }

@@ -71,7 +71,7 @@ var MAXDY = METRE * 15;
 var ACCEL = MAXDX * 2;
 var FRICTION = MAXDX * 6;
 var JUMP = METRE * 1500;
-// some variables to calculate the Frames Per Second (FPS - this tells use
+// some variables to calculate the Frames Per Second (FPS - this tells us
 // how fast our game is running, and allows us to make the game run at a 
 // constant speed)
 var fps = 0;
