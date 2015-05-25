@@ -193,11 +193,9 @@ function runGame(deltaTime)
 	drawMap();
 
 	
-//score
-	//context.fillStyle = "black";
-	//context.font = "32px Arial";
-	//var scoreText = " Score: " + score;
-	//context.drawText(scoreText, SCREEN_WIDTH - 170, 35);
+	context.font = "24px Verdana";
+	context.fillStyle = "#FF0";
+	context.fillText("Chuck Points: " + score, 230, 20);
 	
 	// life counter
 	for(var i=0; i<Lives; i++)
