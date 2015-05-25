@@ -105,6 +105,8 @@ Player.prototype.update = function(deltaTime)
 			this.sprite.setAnimation(ANIM_JUMP_RIGHT)
 			if (this.jumping == true);
 			this.sprite.setAnimation.setLoop(loop)
+			if (this.jumping = isFinished() == true);
+			this.sprite.setAnimation(ANIM_IDLE_RIGHT)
 	}
 
 	}

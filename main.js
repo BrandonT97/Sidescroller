@@ -41,6 +41,7 @@ var gameState = STATE_SPLASH;
 var score = 0;
 var Lives = 4;
 
+
 var LAYER_COUNT = 3;
 //The number of layers in your map. In the sample from this week’s lesson we’re using
 //a background layer, a layer for the platforms, and a layer for the ladders. (We’ll add
@@ -204,9 +205,8 @@ function runGame(deltaTime)
 	}
 	
 var deltaTime = getDeltaTime();
-
-context.drawImage(chuckNorris, SCREEN_WIDTH/2 - chuckNorris.width/2, SCREEN_HEIGHT/2 - chuckNorris.height/2);
-
+//context.drawImage(enemy, 50, 100);
+context.drawImage(chuckNorris, 20, 330);
 // update the frame counter
 
 	fpsTime += deltaTime;

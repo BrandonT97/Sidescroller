@@ -1,4 +1,10 @@
 
+var canvas = document.getElementById("gameCanvas");
+var context = canvas.getContext("2d");
+
+var SCREEN_WIDTH = canvas.width;
+var SCREEN_HEIGHT = canvas.height;
+
 var Vector2 = function(){this.x= 0; this.y = 0;};
 
 this.x = 0;
