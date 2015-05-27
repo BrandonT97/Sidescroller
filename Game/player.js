@@ -16,10 +16,6 @@ var SCREEN_HEIGHT = canvas.height;
 	this.KEY_W = 87;
 	this.KEY_SHIFT = 16;
 
-
-
-var Lives = 4;
-
 var LEFT = 0;
 var RIGHT = 1;
 
@@ -37,22 +33,13 @@ var ANIM_MAX = 6;
 
 var direction = RIGHT;
 
-//var player = {
-//	image: document.createElement("img"),
-//	x: SCREEN_WIDTH/2,
-//	y: SCREEN_HEIGHT/2,
-//	width: 93,
-//	height: 80,
-//	velocityX: 0,
-//	velocityY: 0,
-	//angularVelocity: 0,
-	//rotation: 0
-//};
+var chuckNorris = new Player;
+
 
 
 var Player = function()
 {
-	this.sprite = new Sprite("ChuckNorris.png");
+	this.sprite = new Sprite("Picture Files/ChuckNorris.png");
 	this.sprite.buildAnimation(12, 8, 165, 126, 0.05,
 		[0, 1, 2, 3, 4, 5, 6, 7]);
 	this.sprite.buildAnimation(12, 8, 165, 126, 0.05,
@@ -82,6 +69,7 @@ var Player = function()
 	this.jumping = false;
 	
 	this.direction = LEFT;
+	this.cooldownTimer = 0;
 };
 
 Player.prototype.update = function(deltaTime)
@@ -118,9 +106,9 @@ Player.prototype.update = function(deltaTime)
 			}
 		}
 	}
-	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true) {
-	jump = true;
-	if (jump && !this.jumping && !falling)
+	if(keyboard.isKeyDown(keyboard.KEY_UP) == true) {
+		jump = true;
+		if (jump && !this.jumping && !falling)
 	{
 // apply an instantaneous (large) vertical impulse
 		
@@ -132,9 +120,24 @@ Player.prototype.update = function(deltaTime)
 			this.sprite.setAnimation(ANIM_JUMP_RIGHT)
 			if (this.jumping == true);
 			this.sprite.setAnimation.setLoop(loop)
+			if (this.jumping = isFinished() == true);
+			this.sprite.setAnimation(ANIM_IDLE_RIGHT)
+			
 	}
 
 	}
+	if(this.cooldownTimer > 0)
+	{
+		this.cooldownTimer -= deltaTime;
+	}
+	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true && this.cooldownTimer <= 0) {
+		sfxFire.play();
+		this.cooldownTimer = 0.3;
+// Shoot a bullet
+	}
+	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true) {
+	jump = true;
+	
 
 	var wasleft = this.velocity.x < 0;
 	var wasright = this.velocity.x > 0;
@@ -230,6 +233,8 @@ Player.prototype.update = function(deltaTime)
 		}	
 	Player.prototype.draw = function()
 	{
-		this.sprite.draw(context, this.position.x, this.position.y);
+		context.drawImage(this.image,
+		this.position.x - worldOffsetX, this.position.y);
 	}
+
 }
