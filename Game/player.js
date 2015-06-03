@@ -35,10 +35,37 @@ var direction = RIGHT;
 
 var chuckNorris = new Player;
 
+function PlayerShoot(deltaTime)
+{
+	var bullet = {
+		image: document.createElement("img"),
+		x: player.x,
+		y: player.y,
+		width:28,
+		height: 28,
+		velocityX: 0,
+		velocityY: 0
+};
+	bullet.image.src = "Picture Files/bullet.png";
+// velocity that shoots the bullet up
+	var velX = 0;
+	var velY = 1;
+// rotates the bullets according to the ship current position
+	var s = Math.sin(player.rotation);
+	var c = Math.cos(player.rotation);
+// see wikipedia the worlds most accurate information site with "rotation matrix"
+	var xVel = (velX * c) - (velY * s);
+	var yVel = (velX * s) + (velY * c);
+	bullet.velocityX = xVel * BULLET_SPEED;
+	bullet.velocityY = yVel * BULLET_SPEED;
+
+	bullets.push(bullet);
+}
 
 
 var Player = function()
 {
+	isAlive: true;
 	this.sprite = new Sprite("Picture Files/ChuckNorris.png");
 	this.sprite.buildAnimation(12, 8, 165, 126, 0.05,
 		[0, 1, 2, 3, 4, 5, 6, 7]);
@@ -133,10 +160,10 @@ Player.prototype.update = function(deltaTime)
 	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true && this.cooldownTimer <= 0) {
 		sfxFire.play();
 		this.cooldownTimer = 0.3;
+		PlayerShoot();
 // Shoot a bullet
 	}
-	if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true) {
-	jump = true;
+	
 	
 
 	var wasleft = this.velocity.x < 0;
@@ -236,5 +263,10 @@ Player.prototype.update = function(deltaTime)
 		context.drawImage(this.image,
 		this.position.x - worldOffsetX, this.position.y);
 	}
-
+	if(cellAtTileCoord(LAYER_OBJECT_TRIGGERS, tx, ty) == true)
+	{
+	 switch(gameState)
+	 STATE_GAMEOVER;
+	 break;
+	}
 }

@@ -41,6 +41,18 @@ var gameState = STATE_SPLASH;
 var score = 0;
 var Lives = 4;
 
+//collision detection
+function intersects(x1, y1, w1, h1, x2, y2, w2, h2)
+{
+		if(y2 + h2 < y1 ||
+			x2 + w2 < x1 ||
+			x2 > x1 + w1 ||
+			y2 > y1 + h1)
+	{
+	return false;
+	}
+	return true;
+}
 
 var LAYER_COUNT = 3;
 //The number of layers in your map. In the sample from this week’s lesson we’re using
@@ -79,11 +91,18 @@ var fps = 0;
 var fpsCount = 0;
 var fpsTime = 0;
 
+var ENEMY_MAXDX = METER * 5;
+var ENEMY_ACCEL = ENEMY_MAXDX * 2;
+var enemies = [];
+var bullets = [];
+
 var LAYER_COUNT = 3;
 var LAYER_BACKGROUND = 0;
 var LAYER_PLATFORMS = 1;
 var LAYER_LADDER = 2;
 
+var LAYER_OBJECT_ENEMIES = 3;
+var LAYER_OBJECT_TRIGGERS = 4;
 // load an image to draw
 
 var chuckNorris = new Player();
@@ -140,6 +159,38 @@ function initialize() {
 			isSfxPlaying = false;
 		}
 	} );
+	// add enemies
+	idx = 0;
+		for(var y = 0; y < level3.layers[LAYER_OBJECT_ENEMIES].height; y++) {
+		for(var x = 0; x < level3.layers[LAYER_OBJECT_ENEMIES].width; x++) {
+	if(level3.layers[LAYER_OBJECT_ENEMIES].data[idx] != 0) {
+			var px = tileToPixel(x);
+			var py = tileToPixel(y);
+			var e = new Enemy(px, py);
+			enemies.push(e);
+			}
+			idx++;
+		}
+	} 
+	// initialize trigger layer in collision map
+	cells[LAYER_OBJECT_TRIGGERS] = [];
+	idx = 0;
+		for(var y = 0; y < level3.layers[LAYER_OBJECT_TRIGGERS].height; y++) {
+			cells[LAYER_OBJECT_TRIGGERS][y] = [];
+		for(var x = 0; x < level3.layers[LAYER_OBJECT_TRIGGERS].width; x++) {
+			if(level1.layers[LAYER_OBJECT_TRIGGERS].data[idx] != 0) {
+				cells[LAYER_OBJECT_TRIGGERS][y][x] = 1;
+				cells[LAYER_OBJECT_TRIGGERS][y-1][x] = 1;
+				cells[LAYER_OBJECT_TRIGGERS][y-1][x+1] = 1;
+				cells[LAYER_OBJECT_TRIGGERS][y][x+1] = 1;
+		}
+		else if(cells[LAYER_OBJECT_TRIGGERS][y][x] != 1) {
+// if we haven't set this cell's value, then set it to 0 now
+				cells[LAYER_OBJECT_TRIGGERS][y][x] = 0;
+			}
+			idx++;
+		}
+	}
 }
 
 function cellAtPixelCoord(layer, x,y)
@@ -248,12 +299,100 @@ function runGame(deltaTime)
 	
 	Player.update(deltaTime);
 	
+	
+	
+	for(var i=0; i<enemies.length; i++)
+	{
+		enemies[i].update(deltaTime);
+		enemies[i].draw();
+	}
+	
+	for(var i=0; i<bullets.length; i++)
+	{
+		bullets[i].update(deltaTime);
+		bullets[i].draw();
+	}
 	drawMap();
 	Player.draw();
 	
+	switch(gameState)
+	{
+		case STATE_SPLASH:
+			runSplash(deltaTime);
+			break;
+		case STATE_GAME:
+			runGame(deltaTime);
+			break;
+		case STATE_GAMEOVER:
+			runGameOver(deltaTime);
+			break;
+}
+
 	context.font = "24px Verdana";
 	context.fillStyle = "#FF0";
 	context.fillText("Chuck Points: " + score, 230, 20);
+	
+	for(var i=0; i<bullets.length; i++)
+	{
+		if(bullets[i].x < -bullets[i].width ||
+			bullets[i].x > SCREEN_WIDTH ||
+			bullets[i].y < -bullets[i].height ||
+			bullets[i].y > SCREEN_HEIGHT)
+		{
+			bullets.splice(i, 1);
+			break;
+		}
+	}
+	for(var i=0; i<enemies.length; i++)
+	{
+		enemies[i].update(deltaTime);
+			if (intersects(
+			Player.x, Player.y,
+			Player.width, Player.height,
+			enemies[i].x, enemies.[i].y,
+			enemies[i].width, enemies[i].height;) == true;
+			{
+				Lives -= -1;
+				if Player.Lives < 1 == true;
+				Player.isAlive = false;
+				if Player.isAlive == false;
+				Player.splice;
+				break;
+				switch(gameState)
+				STATE_GAMEOVER;
+				break;
+			}
+		
+	}
+	var hit=false;
+	for(var i=0; i<bullets.length; i++)
+	{
+		bullets[i].update(deltaTime);
+		if( bullets[i].position.x - worldOffsetX < 0 ||
+		bullets[i].position.x - worldOffsetX > SCREEN_WIDTH)
+	{
+	hit = true;
+	}
+	for(var j=0; j<enemies.length; j++)
+	{
+		if(intersects( bullets[i].position.x, bullets[i].position.y, TILE, TILE,
+		enemies[j].position.x, enemies[j].position.y, TILE, TILE) == true)
+	{
+// kill both the bullet and the enemy
+		enemies.splice(j, 1);
+			hit = true;
+// increment the player score
+			score += 1;
+		break;
+		}
+	}
+		if(hit == true)
+	{
+			bullets.splice(i, 1);
+			break;
+		}
+	}
+	
 	
 	// life counter
 	for(var i=0; i<Lives; i++)
@@ -261,8 +400,6 @@ function runGame(deltaTime)
 		context.drawImage(heartImage, 20 + ((heartImage.width+2)*i), 20);
 	}
 	
-
-
 context.save();
 context.translate(chuckNorris.x, chuckNorris.y);
 context.drawImage(chuckNorris, x, y);
