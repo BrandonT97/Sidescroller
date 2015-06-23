@@ -91,7 +91,7 @@ var fps = 0;
 var fpsCount = 0;
 var fpsTime = 0;
 
-var ENEMY_MAXDX = METER * 5;
+var ENEMY_MAXDX = METRE * 5;
 var ENEMY_ACCEL = ENEMY_MAXDX * 2;
 var enemies = [];
 var bullets = [];
@@ -349,20 +349,17 @@ function runGame(deltaTime)
 			if (intersects(
 			Player.x, Player.y,
 			Player.width, Player.height,
-			enemies[i].x, enemies.[i].y,
-			enemies[i].width, enemies[i].height;) == true;
+			enemies[i].x, enemies[i].y,
+			enemies[i].width, enemies[i].height) == true)
 			{
 				Lives -= -1;
-				if Player.Lives < 1 == true;
+				if (Lives <= 0 == true);
 				Player.isAlive = false;
-				if Player.isAlive == false;
+				if (Player.isAlive == false);
 				Player.splice;
 				break;
-				switch(gameState)
-				STATE_GAMEOVER;
-				break;
+				gameState: 3;
 			}
-		
 	}
 	var hit=false;
 	for(var i=0; i<bullets.length; i++)

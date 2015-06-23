@@ -264,9 +264,7 @@ Player.prototype.update = function(deltaTime)
 		this.position.x - worldOffsetX, this.position.y);
 	}
 	if(cellAtTileCoord(LAYER_OBJECT_TRIGGERS, tx, ty) == true)
-	{
-	 switch(gameState)
-	 STATE_GAMEOVER;
-	 break;
+	{	
+		gameState: 3;
 	}
 }
